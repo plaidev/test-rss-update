@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rss-test - Repository Updates Feed</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="{{FEED_URL}}">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f6f8fa;
+            color: #24292f;
+        }
+        .container {
+            background-color: white;
+            border-radius: 6px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+        h1 {
+            color: #24292f;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 10px;
+        }
+        .feed-info {
+            background-color: #dff6dd;
+            border: 1px solid #34d058;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .feed-link {
+            background-color: #2da44e;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .feed-link:hover {
+            background-color: #2c974b;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+        }
+        .description {
+            color: #57606a;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>rss-test Repository Updates</h1>
+
+        <div class="description">
+            <p>このページは、rss-testリポジトリのmainブランチ更新情報をGitHub標準のAtomフィードで提供します。</p>
+        </div>
+
+        <div class="feed-info">
+            <h2>Atom Feed (GitHub標準)</h2>
+            <p>最新のコミット情報を取得するには、以下のAtomフィードURLをご利用ください：</p>
+            <code>{{FEED_URL}}</code>
+            <br>
+            <a href="{{FEED_URL}}" class="feed-link" target="_blank">Atom Feed を購読</a>
+        </div>
+
+        <h2>使い方</h2>
+        <ul>
+            <li>RSSリーダー（Feedly、Inoreaderなど）にフィードURLを追加</li>
+            <li>mainブランチへのコミットがリアルタイムでフィードに反映されます</li>
+            <li>各アイテムにはコミットメッセージ、著者、タイムスタンプ、GitHubへのリンクが含まれます</li>
+            <li>GitHub標準機能を使用しているため、追加のビルドプロセスは不要です</li>
+        </ul>
+    </div>
+</body>
+</html>
