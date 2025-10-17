@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rss-test - Repository Updates Feed</title>
+    <title>iOS SDK Release Notes - Atom Feed</title>
     <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="{{FEED_URL}}">
     <style>
         body {
@@ -59,15 +59,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>rss-test Repository Updates</h1>
+        <h1>iOS SDK Release Notes</h1>
 
         <div class="description">
-            <p>このページは、rss-testリポジトリのmainブランチ更新情報をGitHub標準のAtomフィードで提供します。</p>
+            <p>KARTE iOS SDK v2のリリースノートをAtomフィードで提供します。</p>
         </div>
 
         <div class="feed-info">
-            <h2>Atom Feed (GitHub標準)</h2>
-            <p>最新のコミット情報を取得するには、以下のAtomフィードURLをご利用ください：</p>
+            <h2>Atom Feed</h2>
+            <p>最新のリリース情報を取得するには、以下のAtomフィードURLをご利用ください：</p>
             <code>{{FEED_URL}}</code>
             <br>
             <a href="{{FEED_URL}}" class="feed-link" target="_blank">Atom Feed を購読</a>
@@ -76,9 +76,9 @@
         <h2>使い方</h2>
         <ul>
             <li>RSSリーダー（Feedly、Inoreaderなど）にフィードURLを追加</li>
-            <li>mainブランチへのコミットがリアルタイムでフィードに反映されます</li>
-            <li>各アイテムにはコミットメッセージ、著者、タイムスタンプ、GitHubへのリンクが含まれます</li>
-            <li>GitHub標準機能を使用しているため、追加のビルドプロセスは不要です</li>
+            <li>mainブランチへのプッシュごとに最新20件のコミット情報が更新されます</li>
+            <li>各アイテムには<a href="https://developers.karte.io/docs/release-notes-ios-sdk-v2#/">リリースノートページ</a>へのリンクが含まれます</li>
+            <li>コミットメッセージ、著者、タイムスタンプなどの詳細情報も取得できます</li>
         </ul>
     </div>
 </body>

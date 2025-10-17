@@ -31,10 +31,52 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
-      - name: Generate index.html
+      - name: Generate Atom Feed
         run: |
           mkdir -p docs
-          FEED_URL="https://github.com/${{ github.repository }}/commits/main.atom"
+          LINK_URL="https://developers.karte.io/docs/release-notes-ios-sdk-v2#/"
+          FEED_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/feed.atom"
+          UPDATED=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+          cat > docs/feed.atom << EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <feed xmlns="http://www.w3.org/2005/Atom">
+            <title>iOS SDK Release Notes</title>
+            <link href="${LINK_URL}" rel="alternate"/>
+            <link href="${FEED_URL}" rel="self"/>
+            <id>${FEED_URL}</id>
+            <updated>${UPDATED}</updated>
+          EOF
+
+          git log -20 --pretty=format:'%H|%an|%ae|%aI|%s|%b' | while IFS='|' read hash author email date subject body; do
+            # Escape XML special characters
+            subject_escaped=$(echo "$subject" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'\''/\&apos;/g')
+            body_escaped=$(echo "$body" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'\''/\&apos;/g')
+
+            cat >> docs/feed.atom << EOF
+            <entry>
+              <title>${subject_escaped}</title>
+              <link href="${LINK_URL}"/>
+              <id>urn:commit:${hash}</id>
+              <updated>${date}</updated>
+              <author>
+                <name>${author}</name>
+                <email>${email}</email>
+              </author>
+              <content type="html">${body_escaped}</content>
+              <summary>${subject_escaped}</summary>
+            </entry>
+          EOF
+          done
+
+          cat >> docs/feed.atom << 'EOF'
+          </feed>
+          EOF
+
+          echo "Generated Atom feed with link to: ${LINK_URL}"
+      - name: Generate index.html
+        run: |
+          FEED_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/feed.atom"
           sed "s|{{FEED_URL}}|${FEED_URL}|g" .github/templates/index.html.template > docs/index.html
           echo "Generated index.html with feed URL: ${FEED_URL}"
       - name: Setup Pages
