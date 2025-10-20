@@ -14,13 +14,13 @@
 | KarteDebugger | KARTE for Appのデバッグ機能を提供します。 | 1.1.0 |
 
 # Releases - xxxx.xx.xx
-## Version 3.0.0
+## Version 3.1.0
 
-### Core 2.32.0
+### Core 20.32.0
 ** 🔨CHANGED**
 - Testtesttest
 
-### RemoteNotification 2.13.0
+### RemoteNotification 2.1300.0
 - hogehoge
 
 
