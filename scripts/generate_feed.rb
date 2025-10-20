@@ -126,9 +126,9 @@ class AtomFeedGenerator
     entry_id = "urn:sha256:#{content_hash}"
     entry.add_element('id').text = entry_id
 
-    # Convert release date to ISO8601 format
-    published_time = parse_release_date(@release_info[:date])
-    entry.add_element('published').text = published_time
+    # Use feed generation time for both published and updated
+    # This ensures RSS readers recognize it as a new entry
+    entry.add_element('published').text = @updated_time
     entry.add_element('updated').text = @updated_time
 
     # Author
@@ -143,12 +143,6 @@ class AtomFeedGenerator
     # Summary
     summary = "#{title} - Released on #{@release_info[:date]}"
     entry.add_element('summary').text = summary
-  end
-
-  def parse_release_date(date_string)
-    # Convert "2025.09.25" to ISO8601 format "2025-09-25T00:00:00Z"
-    date_parts = date_string.split('.')
-    "#{date_parts[0]}-#{date_parts[1]}-#{date_parts[2]}T00:00:00Z"
   end
 
   def escape_html(text)
