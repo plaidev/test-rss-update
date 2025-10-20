@@ -13,6 +13,18 @@
 | KarteNotificationServiceExtension | リッチプッシュ通知機能を提供します。 | 1.3.0 |
 | KarteDebugger | KARTE for Appのデバッグ機能を提供します。 | 1.1.0 |
 
+# Releases - xxxx.xx.xx
+## Version 3.0.0
+
+### Core 2.32.0
+** 🔨CHANGED**
+- Testtesttest
+
+### RemoteNotification 2.13.0
+- hogehoge
+
+### InAppFrame 0.6.0
+
 # Releases - 2025.09.25
 ## Version 2.27.0
 
@@ -23,7 +35,6 @@
 
 ** 🔨CHANGED**
 - InAppMessaging2.21.0で追加した接客の非表示対象にHealthKitの権限取得ダイアログを追加しました。
-
 
 
 # Releases - 2025.09.12
