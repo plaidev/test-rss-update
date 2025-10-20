@@ -23,7 +23,6 @@
 ### RemoteNotification 2.13.0
 - hogehoge
 
-### InAppFrame 0.6.0
 
 # Releases - 2025.09.25
 ## Version 2.27.0
