@@ -97,10 +97,8 @@ class AtomFeedGenerator
     feed.add_element('id').text = @feed_url
     feed.add_element('updated').text = @updated_time
 
-    # Add entries for each module
-    @release_info[:modules].each do |mod|
-      add_entry(feed, mod)
-    end
+    # Add single entry for the entire release
+    add_release_entry(feed)
 
     # Format XML with indentation
     formatter = REXML::Formatters::Pretty.new(2)
@@ -112,16 +110,18 @@ class AtomFeedGenerator
 
   private
 
-  def add_entry(feed, mod)
+  def add_release_entry(feed)
     entry = feed.add_element('entry')
 
-    # Entry metadata
-    title = "#{mod[:name]} #{mod[:version]}"
+    # Entry title: Release version
+    title = "iOS SDK #{@release_info[:version]}"
     entry.add_element('title').text = title
     entry.add_element('link', 'href' => @link_url)
 
-    # Generate content-based hash ID
-    content_for_hash = "#{mod[:name]}:#{mod[:version]}:#{mod[:content].join("\n")}"
+    # Generate content-based hash ID from all modules
+    content_for_hash = @release_info[:modules].map do |mod|
+      "#{mod[:name]}:#{mod[:version]}:#{mod[:content].join("\n")}"
+    end.join("\n")
     content_hash = Digest::SHA256.hexdigest(content_for_hash)
     entry_id = "urn:sha256:#{content_hash}"
     entry.add_element('id').text = entry_id
@@ -135,13 +135,20 @@ class AtomFeedGenerator
     author = entry.add_element('author')
     author.add_element('name').text = 'KARTE'
 
-    # Content
-    content_html = "<h3>#{escape_html(title)}</h3>\n"
-    content_html += escape_html(mod[:content].join("\n"))
+    # Content: All modules in single entry
+    content_html = "<h2>#{escape_html(title)} - #{escape_html(@release_info[:date])}</h2>\n"
+
+    @release_info[:modules].each do |mod|
+      module_title = "#{mod[:name]} #{mod[:version]}"
+      content_html += "<h3>#{escape_html(module_title)}</h3>\n"
+      content_html += "<pre>#{escape_html(mod[:content].join("\n"))}</pre>\n"
+    end
+
     entry.add_element('content', 'type' => 'html').text = content_html
 
-    # Summary
-    summary = "#{title} - Released on #{@release_info[:date]}"
+    # Summary: List all updated modules
+    module_list = @release_info[:modules].map { |mod| "#{mod[:name]} #{mod[:version]}" }.join(', ')
+    summary = "#{title} released on #{@release_info[:date]} - Updated modules: #{module_list}"
     entry.add_element('summary').text = summary
   end
 
