@@ -13,16 +13,16 @@
 | KarteNotificationServiceExtension | リッチプッシュ通知機能を提供します。 | 1.3.0 |
 | KarteDebugger | KARTE for Appのデバッグ機能を提供します。 | 1.1.0 |
 
-# Releases - 2025.10.20
-## Version 3.1.0
+# Releases - 2025.10.21
+## Version 4.1.0
 
-### Core 20.32.0
+### Core 200.32.0
 ** 🔨CHANGED**
 - Testtesttest
 
-### RemoteNotification 2.1300.0
-- hogehoge
-
+### VisualTracking 20.14.0
+** 🔨CHANGED**
+- なんか修正しました
 
 # Releases - 2025.09.25
 ## Version 2.27.0
